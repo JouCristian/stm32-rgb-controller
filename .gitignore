@@ -1,0 +1,14 @@
+# Keil build outputs
+Objects/
+Listings/
+
+# Keil user/debug settings
+*.uvoptx
+*.uvguix.*
+*.uvgui.*
+DebugConfig/
+
+# Temporary files
+*.bak
+*.tmp
+*.log
