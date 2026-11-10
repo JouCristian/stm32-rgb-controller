@@ -3,6 +3,7 @@
 #include "effects.h"
 #include "uart.h"
 #include "commands.h"
+#include "adc.h"
 
 static volatile uint32_t g_ms = 0;
 
@@ -27,6 +28,7 @@ int main(void)
     RGB_Init();
     SysTick_Init();
     UART1_Init();
+    ADC1_PotInit();
 
     Effects_SetMode(EFFECT_RGB_FADE);
 

@@ -1,6 +1,7 @@
 #include "commands.h"
 #include "effects.h"
 #include "uart.h"
+#include "adc.h"
 #include <string.h>
 
 #define COMMAND_BUFFER_SIZE 64U
@@ -70,10 +71,21 @@ static void execute_line(void)
             Effects_SetStaticRGB(0U, 0U, 0U);
             ok = 1U;
         }
+    } else if (strcmp(command, "ADC") == 0) {
+        uint16_t raw;
+        if (next_token(&cursor) == 0 && ADC1_PotRead(&raw)) {
+            char response[] = "ADC=0000\r\n";
+            response[4] = (char)('0' + raw / 1000U);
+            response[5] = (char)('0' + (raw / 100U) % 10U);
+            response[6] = (char)('0' + (raw / 10U) % 10U);
+            response[7] = (char)('0' + raw % 10U);
+            UART1_SendString(response);
+            ok = 1U;
+        }
     } else if (strcmp(command, "HELP") == 0) {
         if (next_token(&cursor) == 0) {
             UART1_SendString("MODE BREATH\r\nMODE FADE\r\n"
-                             "RGB r g b (0-1000)\r\nOFF\r\nHELP\r\n");
+                             "RGB r g b (0-1000)\r\nOFF\r\nADC\r\nHELP\r\n");
             ok = 1U;
         }
     }

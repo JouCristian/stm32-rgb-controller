@@ -431,6 +431,16 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>ADC</GroupName>
+          <Files>
+            <File>
+              <FileName>adc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Core\Src\adc.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Headers</GroupName>
           <Files>
             <File>
@@ -457,6 +467,11 @@
               <FileName>commands.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Core\Inc\commands.h</FilePath>
+            </File>
+            <File>
+              <FileName>adc.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Core\Inc\adc.h</FilePath>
             </File>
           </Files>
         </Group>
