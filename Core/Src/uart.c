@@ -3,15 +3,15 @@
 
 void UART1_Init(void) {
     //Turn on GPIOA's USART1 clock
-    RCC->AHB1ENR | RCC_AHB1ENR_GPIOAEN;
-    RCC->APB2ENR | RCC_APB2ENR_USART1EN;
+    RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN;
+    RCC->APB2ENR |= RCC_APB2ENR_USART1EN;
 
     (void)RCC->AHB1ENR;
     (void)RCC->APB2ENR;
 
 
     //Set PA9(TX) PA10(RX) as reuse module
-    GPIOA->MODER &= ((3U << 18) | (3U << 20));
+    GPIOA->MODER &= ~((3U << 18) | (3U << 20));
     GPIOA->MODER |= ((2U << 18) | (2U << 20));
 
     //PA9、PA10 choose AF7(USART1)
