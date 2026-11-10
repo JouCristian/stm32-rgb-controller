@@ -1,13 +1,11 @@
 #include "stm32f4xx.h"
 #include "rgb.h"
-#include "pwm.h"
-
-/*static void delay_rough(void) {
-    for(uint32_t i = 0U; i < 5000000U; i++) __NOP();
-}*/
-
+#include "effects.h"
 
 static volatile uint32_t g_ms = 0;
+
+/* Referenced by the startup vector table. */
+void SysTick_Handler(void);
 
 void SysTick_Handler(void) {
     g_ms++;
@@ -27,26 +25,10 @@ int main(void)
     RGB_Init();
     SysTick_Init();
 
-    uint32_t last_ms = 0;
-    uint16_t duty = 0;
-    uint16_t step = 0;
-
-    PWM_RGB_SetDuty(0,0,0);
+    /* Select EFFECT_RGB_FADE here to test the six-segment color cycle. */
+    Effects_SetMode(EFFECT_RGB_FADE);
 
     while (1) {
-        uint32_t now = g_ms;
-        if(now - last_ms >= 10U) {
-            last_ms = now;
-            duty += step;
-            if(duty >= 1000) {
-                duty = 1000;
-                step = -10;
-            }
-            else if(duty <= 0) {
-                duty = 0;
-                step = 10;
-            }
-            PWM_RGB_SetDuty(duty,0,0);
-        }
+        Effects_Update(g_ms);
     }
 }

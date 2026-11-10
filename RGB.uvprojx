@@ -411,6 +411,16 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>Effects</GroupName>
+          <Files>
+            <File>
+              <FileName>effects.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Core\Src\effects.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Headers</GroupName>
           <Files>
             <File>
@@ -422,6 +432,11 @@
               <FileName>pwm.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Core\Inc\pwm.h</FilePath>
+            </File>
+            <File>
+              <FileName>effects.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Core\Inc\effects.h</FilePath>
             </File>
           </Files>
         </Group>
