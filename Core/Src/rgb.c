@@ -1,5 +1,6 @@
 #include "rgb.h"
 #include "pwm.h"
+#include "effects.h"
 
 typedef struct {
     uint8_t r : 1;
@@ -19,9 +20,9 @@ static const RgbMask colors[] = {
 };
 
 static void led_setColor(RgbMask mask) {
-    PWM_RGB_SetDuty(mask.r ? 1000U : 0U,
-                    mask.g ? 1000U : 0U,
-                    mask.b ? 1000U : 0U);
+    Effects_SetStaticRGB(mask.r ? 1000U : 0U,
+                         mask.g ? 1000U : 0U,
+                         mask.b ? 1000U : 0U);
 }
 
 void RGB_Init(void)

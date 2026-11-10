@@ -421,6 +421,16 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>Dimmer</GroupName>
+          <Files>
+            <File>
+              <FileName>dimmer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Core\Src\dimmer.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Commands</GroupName>
           <Files>
             <File>
@@ -472,6 +482,11 @@
               <FileName>adc.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Core\Inc\adc.h</FilePath>
+            </File>
+            <File>
+              <FileName>dimmer.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Core\Inc\dimmer.h</FilePath>
             </File>
           </Files>
         </Group>

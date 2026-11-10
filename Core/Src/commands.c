@@ -2,6 +2,7 @@
 #include "effects.h"
 #include "uart.h"
 #include "adc.h"
+#include "dimmer.h"
 #include <string.h>
 
 #define COMMAND_BUFFER_SIZE 64U
@@ -71,6 +72,17 @@ static void execute_line(void)
             Effects_SetStaticRGB(0U, 0U, 0U);
             ok = 1U;
         }
+    } else if (strcmp(command, "POT") == 0) {
+        char *state = next_token(&cursor);
+        if (state != 0 && next_token(&cursor) == 0) {
+            if (strcmp(state, "ON") == 0) {
+                Dimmer_SetEnabled(1U);
+                ok = 1U;
+            } else if (strcmp(state, "OFF") == 0) {
+                Dimmer_SetEnabled(0U);
+                ok = 1U;
+            }
+        }
     } else if (strcmp(command, "ADC") == 0) {
         uint16_t raw;
         if (next_token(&cursor) == 0 && ADC1_PotRead(&raw)) {
@@ -85,7 +97,8 @@ static void execute_line(void)
     } else if (strcmp(command, "HELP") == 0) {
         if (next_token(&cursor) == 0) {
             UART1_SendString("MODE BREATH\r\nMODE FADE\r\n"
-                             "RGB r g b (0-1000)\r\nOFF\r\nADC\r\nHELP\r\n");
+                             "RGB r g b (0-1000)\r\nOFF\r\n"
+                             "POT ON\r\nPOT OFF\r\nADC\r\nHELP\r\n");
             ok = 1U;
         }
     }

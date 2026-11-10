@@ -4,6 +4,7 @@
 #include "uart.h"
 #include "commands.h"
 #include "adc.h"
+#include "dimmer.h"
 
 static volatile uint32_t g_ms = 0;
 
@@ -33,6 +34,7 @@ int main(void)
     Effects_SetMode(EFFECT_RGB_FADE);
 
     while (1) {
+        Dimmer_Update(g_ms);
         Effects_Update(g_ms);
 
         uint8_t ch;
