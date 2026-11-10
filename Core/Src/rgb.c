@@ -1,5 +1,5 @@
 #include "rgb.h"
-#include "stm32f4xx.h"
+#include "pwm.h"
 
 typedef struct {
     uint8_t r : 1;
@@ -19,24 +19,18 @@ static const RgbMask colors[] = {
 };
 
 static void led_setColor(RgbMask mask) {
-    uint32_t bsrr = 0;
-    bsrr |= mask.r ? (1U << (6 + 16)) : (1U << 6);
-    bsrr |= mask.g ? (1U << (7 + 16)) : (1U << 7);
-    bsrr |= mask.b ? (1U << (8 + 16)) : (1U << 8);
-    GPIOF->BSRR = bsrr;
+    PWM_RGB_SetDuty(mask.r ? 1000U : 0U,
+                    mask.g ? 1000U : 0U,
+                    mask.b ? 1000U : 0U);
 }
 
 void RGB_Init(void)
 {
-    //Turn on the GPIOF Clock
-    RCC->AHB1ENR |= (1U << 5);
-
-    //Set PF6 PF7 PF8 as Output module
-    GPIOF->MODER &= ~(63U << 12);
-    GPIOF->MODER |=  (21U << 12);
+    PWM_RGB_Init();
 }
 
 void RGB_SetColor(Color color)
 {
+    if ((unsigned int)color >= COLOR_COUNT) return;
     led_setColor(colors[color]);
 }
