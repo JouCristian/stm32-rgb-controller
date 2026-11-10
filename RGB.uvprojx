@@ -421,6 +421,16 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>Commands</GroupName>
+          <Files>
+            <File>
+              <FileName>commands.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Core\Src\commands.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Headers</GroupName>
           <Files>
             <File>
@@ -443,10 +453,15 @@
               <FileType>5</FileType>
               <FilePath>.\Core\Inc\uart.h</FilePath>
             </File>
+            <File>
+              <FileName>commands.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Core\Inc\commands.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
-          <GroupName>New Group</GroupName>
+          <GroupName>UART</GroupName>
           <Files>
             <File>
               <FileName>uart.c</FileName>

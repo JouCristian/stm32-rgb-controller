@@ -2,6 +2,7 @@
 #include "rgb.h"
 #include "effects.h"
 #include "uart.h"
+#include "commands.h"
 
 static volatile uint32_t g_ms = 0;
 
@@ -27,7 +28,6 @@ int main(void)
     SysTick_Init();
     UART1_Init();
 
-    /* Select EFFECT_RGB_FADE here to test the six-segment color cycle. */
     Effects_SetMode(EFFECT_RGB_FADE);
 
     while (1) {
@@ -35,8 +35,7 @@ int main(void)
 
         uint8_t ch;
         if(UART1_TryRead(&ch)) {
-            if(ch == '1') Effects_SetMode(EFFECT_BREATH_RED);
-            else if(ch == '2') Effects_SetMode(EFFECT_RGB_FADE);
+            Commands_FeedByte(ch);
         }
     }
 }

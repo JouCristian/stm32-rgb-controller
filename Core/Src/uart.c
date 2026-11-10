@@ -40,3 +40,11 @@ uint8_t UART1_TryRead(uint8_t *ch) {
     *ch = (uint8_t)USART1->DR;
     return 1U;
 }
+
+void UART1_SendString(const char *text)
+{
+    while (*text != '\0') {
+        while ((USART1->SR & USART_SR_TXE) == 0U) {}
+        USART1->DR = (uint8_t)*text++;
+    }
+}

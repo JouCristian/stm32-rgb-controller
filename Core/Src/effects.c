@@ -14,7 +14,8 @@ static uint8_t fade_phase;
 
 void Effects_SetMode(EffectMode mode)
 {
-    if (mode != EFFECT_BREATH_RED && mode != EFFECT_RGB_FADE) return;
+    if (mode != EFFECT_BREATH_RED && mode != EFFECT_RGB_FADE &&
+        mode != EFFECT_STATIC) return;
 
     current_mode = mode;
     duty = 0;
@@ -24,8 +25,16 @@ void Effects_SetMode(EffectMode mode)
     PWM_RGB_SetDuty(mode == EFFECT_RGB_FADE ? EFFECT_DUTY_MAX : 0U, 0U, 0U);
 }
 
+void Effects_SetStaticRGB(uint16_t r, uint16_t g, uint16_t b)
+{
+    current_mode = EFFECT_STATIC;
+    PWM_RGB_SetDuty(r, g, b);
+}
+
 void Effects_Update(uint32_t now_ms)
 {
+    if (current_mode == EFFECT_STATIC) return;
+
     if (start_pending) {
         last_ms = now_ms;
         start_pending = 0U;
